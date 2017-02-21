@@ -18,6 +18,7 @@
         android:layout_height="@dimen/icon_size"
         android:src="@drawable/most"
         android:paddingRight="@dimen/d8"
+        android:paddingBottom="@dimen/d8"
         />
 
     <TextView android:id="@+id/txtTitle"

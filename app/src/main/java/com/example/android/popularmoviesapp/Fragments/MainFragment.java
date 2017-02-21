@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.example.android.popularmoviesapp.Adapters.RecyclerViewAdapter;
 import com.example.android.popularmoviesapp.Adapters.SpinnerOrderAdapter;
 import com.example.android.popularmoviesapp.FetchMoviesAsyncTask;
+import com.example.android.popularmoviesapp.Models.MovieDetails;
 import com.example.android.popularmoviesapp.Models.MoviesList;
 import com.example.android.popularmoviesapp.Models.SpinnerItemContent;
 import com.example.android.popularmoviesapp.R;
@@ -34,10 +35,12 @@ public class MainFragment extends Fragment {
     private final String POPULAR="popular";
     private final String TOP_RATED="top_rated";
 
+    private MoviesList myMoviesList ;
     private RecyclerViewAdapter moviesRecyclerViewAdapter ;
     private RecyclerView moviesRecyclerView;
     private ArrayList<SpinnerItemContent> navSpinner;
     private SpinnerOrderAdapter spinnerOrderAdapter;
+    private Spinner spinner;
 
 
     @Override
@@ -51,8 +54,25 @@ public class MainFragment extends Fragment {
         navSpinner.add(new SpinnerItemContent(getResources().getString(R.string.popular), R.drawable.most));
         navSpinner.add(new SpinnerItemContent(getResources().getString(R.string.top_rated), R.drawable.top));
         onOrientationChange(getResources().getConfiguration().orientation);
+        if (savedInstanceState==null)
+        {
+            fetchDataFromAsyncTask(POPULAR);
+        }
+        else if (savedInstanceState!=null)
+        {
+            myMoviesList = (MoviesList) savedInstanceState.getParcelable("myMoviesList");
+            moviesRecyclerViewAdapter.setMoviesList(myMoviesList ,getActivity());
+
+
+        }
        // fetchDataFromAsyncTask();
         return rootView;
+    }
+
+
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("myMoviesList" ,myMoviesList);
     }
 
 
@@ -76,6 +96,7 @@ public class MainFragment extends Fragment {
         fetchMoviesAsyncTask.setFetchMoviesAsyncTaskCallBack(new FetchMoviesAsyncTask.FetchMoviesAsyncTaskCallBack() {
             @Override
             public void onPostExecute(MoviesList moviesList) {
+                myMoviesList =moviesList ;
                 moviesRecyclerViewAdapter.setMoviesList(moviesList ,getActivity());
             }
         });
@@ -86,7 +107,7 @@ public class MainFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.spinner_order, menu);
         MenuItem item = menu.findItem(R.id.spinner);
-        Spinner spinner = (Spinner) MenuItemCompat.getActionView(item);
+        spinner = (Spinner) MenuItemCompat.getActionView(item);
         spinnerOrderAdapter = new SpinnerOrderAdapter(getActivity() , navSpinner);
         spinner.setAdapter(spinnerOrderAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -103,36 +124,8 @@ public class MainFragment extends Fragment {
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                fetchDataFromAsyncTask(POPULAR);
             }
         });
     }
 
-
-   /* @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.android_action_bar_spinner_menu, menu);
-        MenuItem item = menu.findItem(R.id.spinner);
-        Spinner spinner = (Spinner) MenuItemCompat.getActionView(item);
-        navSpinner = new ArrayList<SpinnerNavItem>();
-        navSpinner.add(new SpinnerItemContent("Local", R.drawable.ic_location));
-        navSpinner.add(new SpinnerItemContent("My Places", R.drawable.ic_location));
-
-        // title drop down adapter
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String f ="ff";
-                Toast.makeText(MainActivity.this, f+" "+position,
-                        Toast.LENGTH_LONG).show();
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });        // assigning the spinner navigation
-        return true;
-    }*/
 }
