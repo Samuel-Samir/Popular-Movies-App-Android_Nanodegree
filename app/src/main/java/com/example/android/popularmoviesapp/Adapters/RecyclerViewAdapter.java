@@ -2,12 +2,15 @@ package com.example.android.popularmoviesapp.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.android.popularmoviesapp.Fragments.MovieDetailsFragment;
 import com.example.android.popularmoviesapp.Models.MovieDetails;
 import com.example.android.popularmoviesapp.Models.MoviesList;
 import com.example.android.popularmoviesapp.R;
@@ -49,6 +52,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter <RecyclerViewAdapt
                 .error(R.drawable.noposter)
                 .into(holder.imageView);
 
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MovieDetailsFragment movieDetailsFragment = new MovieDetailsFragment();
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("myMovieDetails", movieDetails);
+                movieDetailsFragment.setArguments(bundle);
+                ((FragmentActivity)myActivity).getSupportFragmentManager()
+                        .beginTransaction().addToBackStack("movieDetailsFragment").replace(R.id.container,movieDetailsFragment).commit();
+
+
+            }
+        });
     }
 
     @Override
@@ -59,7 +75,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter <RecyclerViewAdapt
         }
         return 0;
     }
-
 
     public class RecyclerViewAdapterHolder extends RecyclerView.ViewHolder
     {
