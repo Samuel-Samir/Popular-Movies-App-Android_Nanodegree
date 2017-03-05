@@ -8,5 +8,7 @@
     <dimen name="d85">85dp</dimen>
     <dimen name="icon_size">30dp</dimen>
     <dimen name="larg_text_size">30sp</dimen>
+    <dimen name="playIcon">60dp</dimen>
+    <dimen name="d18">18dp</dimen>
 
 </resources>

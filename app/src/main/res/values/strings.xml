@@ -6,4 +6,18 @@
     <string name="popular">Popular</string>
     <string name="top_rated">Top Rated</string>
     <string name="movie_details">Movie Details</string>
+    <string name="favorites">Favorites</string>
+    <string name="add_to_favorites">Add To Favorites</string>
+    <string name="remove_from_favorites">Remove From Favorites</string>
+    <string name="trailers">Trailers:</string>
+    <string name="reviews">Reviews:</string>
+    <string name="no_trailers">No Trailers</string>
+    <string name="no_reviews">No Reviews</string>
+    <string name="action_share">Share</string>
+    <string name="add_toast">Added To Favorites</string>
+    <string name="remove_toast">Removed From Favorites</string>
+    <string name="nofavorites">You Don\'t Have Favorites Movies</string>
+    <string name="connection_failed">Connection failed</string>
+    <string name="massage">This application requires network access. Please, enable mobile network or Wi-Fi."</string>
+    <string name="cancel">Cancel</string>
 </resources>

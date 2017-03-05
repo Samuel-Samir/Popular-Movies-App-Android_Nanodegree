@@ -2,9 +2,12 @@ package com.example.android.popularmoviesapp;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 
 import com.example.android.popularmoviesapp.Models.MoviesList;
+import com.example.android.popularmoviesapp.Models.ReviewsList;
+import com.example.android.popularmoviesapp.Models.TrailersList;
 import com.example.android.popularmoviesapp.Utils.NetworkUtils;
 import com.google.gson.Gson;
 
@@ -15,18 +18,23 @@ import java.net.URL;
  * Created by samuel on 2/18/2017.
  */
 
-public class FetchMoviesAsyncTask extends AsyncTask<String ,Void ,MoviesList> {
+public class FetchMoviesAsyncTask extends AsyncTask<String ,Void ,Object> {
 
     private final String LOG_TAG = FetchMoviesAsyncTask.class.getName();
     private ProgressDialog dialog;
+    private Context context;
 
     public FetchMoviesAsyncTask (Activity activity)
     {
         dialog =new ProgressDialog(activity);
+        this.context = activity ;
     }
+
+
+
     public  interface FetchMoviesAsyncTaskCallBack
     {
-         void onPostExecute (MoviesList moviesList);
+         void onPostExecute (Object Object);
     }
 
     private FetchMoviesAsyncTaskCallBack fetchMoviesAsyncTaskCallBack;
@@ -39,20 +47,39 @@ public class FetchMoviesAsyncTask extends AsyncTask<String ,Void ,MoviesList> {
 
 
     @Override
-    protected MoviesList doInBackground(String... params) {
+    protected Object doInBackground(String... params) {
         if (params.length==0)
         {
             return null;
         }
         String moviesOrder =params[0];
-        URL moviesUrlRequest = NetworkUtils.buildUrl(moviesOrder);
+        URL moviesUrlRequest = NetworkUtils.buildUrl(moviesOrder , context );
         try {
 
             String jasonResponse =NetworkUtils.getResponseFromAPI(moviesUrlRequest);
             Gson gson =new Gson();
-            MoviesList moviesListResponse ;
-            moviesListResponse = gson.fromJson(jasonResponse ,MoviesList.class);
-            return moviesListResponse;
+            if (params.length==1)
+            {
+                MoviesList moviesListResponse ;
+                moviesListResponse = gson.fromJson(jasonResponse ,MoviesList.class);
+                return moviesListResponse;
+            }
+
+            else if (params.length==2 && params[1].equals("trailers"))
+            {
+                TrailersList trailersList ;
+                trailersList = gson.fromJson(jasonResponse,TrailersList.class);
+                return trailersList ;
+            }
+
+            else if (params.length==2 && params[1].equals("reviews"))
+            {
+                ReviewsList reviewsList ;
+                reviewsList = gson.fromJson(jasonResponse,ReviewsList.class);
+                return reviewsList;
+            }
+
+            return null;
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -71,11 +98,11 @@ public class FetchMoviesAsyncTask extends AsyncTask<String ,Void ,MoviesList> {
 
 
     @Override
-    protected void onPostExecute(MoviesList moviesList) {
+    protected void onPostExecute(Object Object) {
       //  super.onPostExecute(moviesList);
-        if(moviesList!=null)
+        if(Object!=null)
         {
-            fetchMoviesAsyncTaskCallBack.onPostExecute(moviesList);
+            fetchMoviesAsyncTaskCallBack.onPostExecute(Object);
         }
         if (dialog.isShowing()) {
             dialog.dismiss();

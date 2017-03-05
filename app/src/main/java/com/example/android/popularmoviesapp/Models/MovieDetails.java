@@ -20,6 +20,11 @@ public class MovieDetails implements Parcelable {
     public long vote_count ;
     public double vote_average ;
 
+    public MovieDetails ()
+    {
+
+    }
+
     protected MovieDetails(Parcel in) {
         poster_path = in.readString();
         overview = in.readString();

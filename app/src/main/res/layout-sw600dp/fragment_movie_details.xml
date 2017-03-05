@@ -33,6 +33,7 @@
             android:layout_marginRight="@dimen/d16"
             >
             <ImageView
+                android:paddingTop="@dimen/d32"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -54,6 +55,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/d85"
                     android:textColor="@color/white"
+                    android:textSize="@dimen/larg_text_size"
 
                     />
                 <TextView
@@ -63,6 +65,8 @@
                     android:layout_marginTop="@dimen/d16"
                     android:layout_gravity="center"
                     android:textColor="@color/white"
+                    android:textSize="@dimen/larg_text_size"
+
 
                     />
                 <ImageView
@@ -71,6 +75,7 @@
                     android:layout_gravity="center"
                     android:src="@drawable/ratestar"
                     android:layout_marginTop="@dimen/d16"
+                    android:layout_marginBottom="@dimen/d16"
                     />
 
                 <Button
@@ -83,6 +88,8 @@
                     android:textColor="@color/white"
                     android:padding="@dimen/d8"
                     android:text="@string/add_to_favorites"
+                    android:layout_marginBottom="@dimen/d16"
+
 
                     />
 
@@ -91,6 +98,7 @@
 
         </LinearLayout>
         <TextView
+            android:layout_marginTop="@dimen/d32"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/overview"
@@ -98,17 +106,21 @@
             android:paddingRight="@dimen/d8"
             android:paddingLeft="@dimen/d8"
             android:layout_marginBottom="@dimen/d8"
+            android:textSize="@dimen/larg_text_size"
+
             />
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="@color/white"
+            android:layout_marginTop="@dimen/d16"
+
             ></View>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/trailers"
-            android:textSize="@dimen/d16"
+            android:textSize="@dimen/larg_text_size"
             android:textColor="@color/white"
             android:layout_margin="@dimen/d8"
             />
@@ -124,11 +136,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/no_video"
-            android:textSize="@dimen/d16"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:layout_marginLeft="@dimen/d32"
             android:layout_marginBottom="@dimen/d32"
+            android:textSize="@dimen/larg_text_size"
+
             />
 
 
@@ -143,7 +156,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/reviews"
-            android:textSize="@dimen/d16"
+            android:textSize="@dimen/larg_text_size"
             android:textColor="@color/white"
             android:layout_margin="@dimen/d8"
             />
@@ -158,7 +171,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/no_comment"
-            android:textSize="@dimen/d16"
+            android:textSize="@dimen/larg_text_size"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:layout_marginLeft="@dimen/d32"

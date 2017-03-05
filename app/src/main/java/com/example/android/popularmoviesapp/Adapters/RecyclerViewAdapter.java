@@ -30,6 +30,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter <RecyclerViewAdapt
         this.moviesList = moviesList;
         notifyDataSetChanged();
     }
+
     @Override
     public RecyclerViewAdapterHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
@@ -86,3 +87,4 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter <RecyclerViewAdapt
         }
     }
 }
+//FF4081

@@ -15,6 +15,10 @@ public class MoviesList implements Parcelable{
     public List<MovieDetails> results =new ArrayList<MovieDetails>();
     public int page ;
 
+    public  MoviesList ()
+    {
+
+    }
     protected MoviesList(Parcel in) {
         results = in.createTypedArrayList(MovieDetails.CREATOR);
         page = in.readInt();

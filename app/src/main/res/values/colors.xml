@@ -7,5 +7,6 @@
     <color name="black">#000000</color>
     <color name="whiteBlack">#de101010</color>
     <color name="background">#313131</color>
+    <color name="textBackground">#de101010</color>
 
 </resources>
